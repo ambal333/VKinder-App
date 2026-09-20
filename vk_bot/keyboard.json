@@ -1,0 +1,39 @@
+{
+  "one_time": false,
+  "buttons":[
+    [
+      {
+        "action":{
+          "type":"location",
+          "payload":"{\"button\": \"1\"}"
+        }
+      }
+    ],
+    [
+      {
+        "action":{
+          "type":"text",
+          "payload":"{\"button\": \"1\"}",
+          "label":"Моя анкета"
+        },
+        "color":"negative"
+      },
+      {
+        "action":{
+          "type":"text",
+          "payload":"{\"button\": \"2\"}",
+          "label":"Создать анкету"
+        },
+        "color":"positive"
+      },
+      {
+        "action":{
+          "type":"text",
+          "payload":"{\"button\": \"2\"}",
+          "label":"Выход"
+        },
+        "color":"primary"
+      }
+    ]
+  ]
+}
