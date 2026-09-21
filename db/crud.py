@@ -123,7 +123,21 @@ def get_top_photos(
     :param limit: Сколько фото вернуть (по умолчанию 3)
     :return: Список URL-адресов фотографий (строки)
     """
-    pass
+    with SessionLocal() as session:
+        try:
+            photo_urls_row = (
+                session.query(Photo.url)
+                .filter(Photo.candidate_vk_id == candidate_vk_id)
+                .order_by(Photo.likes_count.desc())
+                .limit(limit=limit)
+                .all()
+            )
+            top_photos = [url[0] for url in photo_urls_row if url[0]]
+            return top_photos
+        except SQLAlchemyError as e:
+            print(f"Ошибка при работе с БД: {e}")
+            return []
+        
 
 
 def add_to_favorites(
