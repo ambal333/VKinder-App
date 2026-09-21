@@ -88,16 +88,26 @@ def save_photo(
     candidate_vk_id: int,
     url: str,
     likes_count: int = 0
-) -> Photo:
+) -> Optional[Photo]:
     """
     Сохраняет фотографию кандидата в БД.
     
     :param candidate_vk_id: ID кандидата, которому принадлежит фото
     :param url: Ссылка на изображение
     :param likes_count: Количество лайков на фото (для сортировки топ-3)
-    :return: Объект Photo
+    :return: Объект Photo из базы данных или None, если произошла ошибка БД 
     """
-    pass
+    with SessionLocal() as session:
+        try:
+            photo = Photo(candidate_vk_id=candidate_vk_id,
+                        url=url, likes_count=likes_count)
+            session.add(photo)
+            session.commit()
+            return photo
+        except SQLAlchemyError as e:
+            session.rollback()
+            print(f"Ошибка при работе с БД: {e}")
+            return None
 
 
 def get_top_photos(
