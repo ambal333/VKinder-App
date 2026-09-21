@@ -140,19 +140,34 @@ def get_top_photos(
         
 
 
-def add_to_favorites(
-    user_vk_id: int,
-    candidate_vk_id: int
-) -> None:
-    """
-    Добавляет кандидата в избранное пользователя.
-    
-    Вызывается, когда пользователь нажимает кнопку "Лайк" / "В избранное".
-    
-    :param user_vk_id: ID пользователя, который лайкает
-    :param candidate_vk_id: ID кандидата, которого лайкнули
-    """
-    pass
+    def add_to_favorites(
+        user_vk_id: int,
+        candidate_vk_id: int
+    ) -> bool:
+        """
+        Добавляет кандидата в избранное пользователя.
+        
+        Вызывается, когда пользователь нажимает кнопку "Лайк" / "В избранное".
+        
+        :param user_vk_id: ID пользователя, который лайкает
+        :param candidate_vk_id: ID кандидата, которого лайкнули
+        :return: True - при успешном добавлении кандидата,
+            False - если кандидат уже в избранном, или при ошибке
+        """
+        with SessionLocal() as session:
+            try:
+                user = session.get(User, user_vk_id)
+                candidate = session.get(Candidate, candidate_vk_id)
+                if user and candidate and candidate not in user.candidates:
+                    user.candidates.append(candidate)
+                    session.commit()
+                    return True
+                else:
+                    return False
+            except SQLAlchemyError as e:
+                session.rollback()
+                print(f"Ошибка при работе с БД: {e}")
+                return False
 
 
 def get_favorites(
