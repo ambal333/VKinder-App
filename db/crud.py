@@ -34,7 +34,7 @@ def get_or_create_user(
     :return: Объект User из базы данных или None, если произошла ошибка БД
     """
     with SessionLocal() as session:
-        user = session.query(User).filter(User.vk_id == vk_id).first()
+        user = session.get(User, vk_id)
         if user:
             return user
         else:
@@ -55,7 +55,7 @@ def save_candidate(
     first_name: str,
     last_name: str,
     profile_link: str
-) -> Candidate:
+) -> Optional[Candidate]:
     """
     Сохраняет кандидата для знакомств в БД.
     
@@ -66,10 +66,23 @@ def save_candidate(
     :param first_name: Имя
     :param last_name: Фамилия
     :param profile_link: Ссылка на профиль
-    :return: Объект Candidate
+    :return: Объект Candidate из базы данных или None, если произошла ошибка БД
     """
-    pass
-
+    with SessionLocal() as session:
+        candidate = session.get(Candidate, vk_id)
+        if candidate:
+            return candidate
+        else:
+            try:
+                candidate = Candidate(vk_id=vk_id, first_name=first_name,
+                                      last_name=last_name, profile_link=profile_link)
+                session.add(candidate)
+                session.commit()
+                return candidate
+            except SQLAlchemyError as e:
+                session.rollback()
+                print(f"Ошибка при работе с БД: {e}")
+                return None
 
 def save_photo(
     candidate_vk_id: int,
