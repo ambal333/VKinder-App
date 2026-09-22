@@ -1,3 +1,8 @@
+"""
+Модуль с описанием моделей базы данных VKinder.
+Содержит таблицы: users, candidates, photos, favorites, blacklist.
+"""
+
 from sqlalchemy import Table, Column, Integer, String, ForeignKey, Index
 from sqlalchemy.orm import relationship, declarative_base
 
