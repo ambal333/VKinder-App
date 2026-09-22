@@ -219,3 +219,6 @@ __marimo__/
 
 # Системный файл macOS
 .DS_Store
+
+# Примечания
+my_notes.md
