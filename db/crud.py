@@ -183,3 +183,53 @@ def get_favorites(user_vk_id: int) -> List[Candidate]:
         except SQLAlchemyError as e:
             print(f"Ошибка при работе с БД: {e}")
             return []
+
+
+def add_to_blacklist(user_vk_id: int, candidate_vk_id: int) -> bool:
+    """
+    Добавляет кандидата в чёрный список пользователя.
+
+    Вызывается, когда пользователь нажимает кнопку "Дизлайк" / "В чёрный список".
+
+    :param user_vk_id: ID пользователя, который ставит дизлайк
+    :param candidate_vk_id: ID кандидата, которому поставили дизлайк
+    :return: True - при успешном добавлении кандидата в чёрный список,
+        False - если кандидат уже в чёрном списке, или при ошибке
+    """
+    with SessionLocal() as session:
+        try:
+            user = session.get(User, user_vk_id)
+            candidate = session.get(Candidate, candidate_vk_id)
+            if user and candidate and candidate not in user.blocked_candidates:
+                user.blocked_candidates.append(candidate)
+                session.commit()
+                return True
+            else:
+                return False
+        except SQLAlchemyError as e:
+            session.rollback()
+            print(f"Ошибка при работе с БД: {e}")
+            return False
+
+
+def get_blacklist(user_vk_id: int) -> List[int]:
+    """
+    Возвращает список vk_id всех кандидатов, которых пользователь
+    добавил в чёрный список.
+
+    Вызывается, когда бот фильтрует кандидатов для показа пользователю.
+
+    :param user_vk_id: ID пользователя
+    :return: Список vk_id кандидатов
+    """
+    with SessionLocal() as session:
+        try:
+            user = session.get(User, user_vk_id)
+            if user:
+                blocked_candidates_id = [c.vk_id for c in user.blocked_candidates]
+                return blocked_candidates_id
+            else:
+                return []
+        except SQLAlchemyError as e:
+            print(f"Ошибка при работе с БД: {e}")
+            return []
