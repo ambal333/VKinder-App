@@ -26,8 +26,18 @@ CREATE TABLE IF NOT EXISTS photos (
 );
 
 -- Создание таблицы избранных (связь многие-ко-многим)
--- Составной первичный ключ гарантирует, что один кандидат не будет добавлен в избранное одним пользователем дважды
+-- Составной первичный ключ гарантирует, что один кандидат
+-- не будет добавлен в избранное одним пользователем дважды
 CREATE TABLE IF NOT EXISTS favorites (
+    user_vk_id INTEGER NOT NULL REFERENCES users(vk_id) ON DELETE CASCADE,
+    candidate_vk_id INTEGER NOT NULL REFERENCES candidates(vk_id) ON DELETE CASCADE,
+    PRIMARY KEY (user_vk_id, candidate_vk_id)
+);
+
+-- Создание таблицы "чёрного списка" (связь многие-ко-многим)
+-- Составной первичный ключ гарантирует, что один кандидат
+-- не будет добавлен в чёрный список одним пользователем дважды
+CREATE TABLE IF NOT EXISTS blacklist (
     user_vk_id INTEGER NOT NULL REFERENCES users(vk_id) ON DELETE CASCADE,
     candidate_vk_id INTEGER NOT NULL REFERENCES candidates(vk_id) ON DELETE CASCADE,
     PRIMARY KEY (user_vk_id, candidate_vk_id)
