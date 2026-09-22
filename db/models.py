@@ -54,6 +54,8 @@ class User(Base):
     age = Column(Integer)
     city = Column(String(100))
     gender = Column(Integer)
+    search_gender = Column(String(10), nullable=True)
+    photo_url = Column(String(255), nullable=True)
 
     candidates = relationship("Candidate", secondary=favorites, back_populates="users")
     blocked_candidates = relationship(
