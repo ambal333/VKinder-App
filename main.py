@@ -4,9 +4,8 @@
 """
 
 from db.database import init_db
-
-# from vk_bot import run_bot
-
+from vk_bot.vk_get_info_photo_user import start_bot
+from vk_bot.vk_get_info_photo_user import keyboard_1
 
 def main():
     print("🚀 Запуск VKinder...")
@@ -17,7 +16,8 @@ def main():
 
     # 2. Запуск бота
     print("🤖 Запуск бота...")
-    # run_bot()
+    keyboard_1()
+    start_bot()
 
 
 if __name__ == "__main__":
