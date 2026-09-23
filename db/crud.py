@@ -19,7 +19,8 @@ def get_or_create_user(
     age: int,
     city: str,
     gender: int,
-    photo_url: Optional[str] = None,
+    search_gender: Optional[str] = None,
+    photo_url: Optional[str] = None
 ) -> Optional[User]:
     """
     Получает пользователя из БД по vk_id.
@@ -49,7 +50,8 @@ def get_or_create_user(
                     age=age,
                     city=city,
                     gender=gender,
-                    photo_url=photo_url,
+                    search_gender=search_gender,
+                    photo_url=photo_url
                 )
                 session.add(user)
                 session.commit()

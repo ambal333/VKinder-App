@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS users (
     city VARCHAR(100),
     gender INTEGER, -- 1 = жен, 2 = муж (согласно документации VK API)
     search_gender VARCHAR(10), -- 'man', 'woman' или NULL
-    photo_url VARCHAR(255)  -- Ссылка на аватарку пользователя
+    photo_url VARCHAR(1000)  -- Ссылка на аватарку пользователя
 );
 
 -- Создание таблицы кандидатов для знакомств
@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS candidates (
 CREATE TABLE IF NOT EXISTS photos (
     id SERIAL PRIMARY KEY,
     candidate_vk_id INTEGER NOT NULL REFERENCES candidates(vk_id) ON DELETE CASCADE,
-    url VARCHAR(255) NOT NULL,
+    url VARCHAR(1000) NOT NULL,
     likes_count INTEGER DEFAULT 0
 );
 

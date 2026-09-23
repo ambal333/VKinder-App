@@ -55,7 +55,7 @@ class User(Base):
     city = Column(String(100))
     gender = Column(Integer)
     search_gender = Column(String(10), nullable=True)
-    photo_url = Column(String(255), nullable=True)
+    photo_url = Column(String(1000), nullable=True)
 
     candidates = relationship("Candidate", secondary=favorites, back_populates="users")
     blocked_candidates = relationship(
@@ -85,7 +85,7 @@ class Photo(Base):
     candidate_vk_id = Column(
         Integer, ForeignKey("candidates.vk_id", ondelete="CASCADE"), nullable=False
     )
-    url = Column(String(255), nullable=False)
+    url = Column(String(1000), nullable=False)
     likes_count = Column(Integer, default=0)
 
     candidate = relationship("Candidate", back_populates="photos")

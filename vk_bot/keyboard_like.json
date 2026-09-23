@@ -1,0 +1,23 @@
+{
+  "one_time": false,
+  "buttons": [
+    [
+      {
+        "action": {
+          "type": "text",
+          "payload": "{\"button\": \"2\"}",
+          "label": "лайк"
+        },
+        "color": "primary"
+      },
+      {
+        "action": {
+          "type": "text",
+          "payload": "{\"button\": \"2\"}",
+          "label": "дизлайк"
+        },
+        "color": "primary"
+      }
+    ]
+  ]
+}

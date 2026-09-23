@@ -4,9 +4,19 @@
     [
       {
         "action":{
-          "type":"location",
-          "payload":"{\"button\": \"1\"}"
-        }
+          "type":"text",
+          "payload":"{\"button\": \"2\"}",
+          "label":"Выход"
+        },
+        "color":"primary"
+      },
+      {
+        "action":{
+          "type":"text",
+          "payload":"{\"button\": \"2\"}",
+          "label":"Добавить в избранное"
+        },
+        "color":"primary"
       }
     ],
     [
@@ -30,7 +40,7 @@
         "action":{
           "type":"text",
           "payload":"{\"button\": \"2\"}",
-          "label":"Выход"
+          "label":"Найти пару"
         },
         "color":"primary"
       }
