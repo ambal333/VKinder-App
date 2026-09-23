@@ -5,7 +5,9 @@ CREATE TABLE IF NOT EXISTS users (
     last_name VARCHAR(100) NOT NULL,
     age INTEGER,
     city VARCHAR(100),
-    gender INTEGER -- 1 = жен, 2 = муж (согласно документации VK API)
+    gender INTEGER, -- 1 = жен, 2 = муж (согласно документации VK API)
+    search_gender VARCHAR(10), -- 'man', 'woman' или NULL
+    photo_url VARCHAR(255)  -- Ссылка на аватарку пользователя
 );
 
 -- Создание таблицы кандидатов для знакомств

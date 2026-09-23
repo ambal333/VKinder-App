@@ -13,7 +13,13 @@ from db.database import SessionLocal
 
 
 def get_or_create_user(
-    vk_id: int, first_name: str, last_name: str, age: int, city: str, gender: int
+    vk_id: int,
+    first_name: str,
+    last_name: str,
+    age: int,
+    city: str,
+    gender: int,
+    photo_url: Optional[str] = None,
 ) -> Optional[User]:
     """
     Получает пользователя из БД по vk_id.
@@ -27,6 +33,7 @@ def get_or_create_user(
     :param age: Возраст
     :param city: Город
     :param gender: Пол (1 = жен, 2 = муж)
+    :param photo_url: Ссылка на фото аватарки пользователя
     :return: Объект User из базы данных или None, если произошла ошибка БД
     """
     with SessionLocal() as session:
@@ -42,6 +49,7 @@ def get_or_create_user(
                     age=age,
                     city=city,
                     gender=gender,
+                    photo_url=photo_url,
                 )
                 session.add(user)
                 session.commit()
@@ -50,6 +58,29 @@ def get_or_create_user(
                 session.rollback()
                 print(f"Ошибка при работе с БД: {e}")
                 return None
+
+
+def update_user_preferences(vk_id: int, search_gender: str) -> bool:
+    """
+    Обновляет предпочтения поиска пользователя (кого он ищет).
+
+    :param vk_id: ID пользователя
+    :param search_gender: 'man' или 'woman'
+    :return: True при успехе, False если пользователь не найден или произошла ошибка
+    """
+    with SessionLocal() as session:
+        try:
+            user = session.get(User, vk_id)
+            if not user:
+                return False
+
+            user.search_gender = search_gender  # type: ignore
+            session.commit()
+            return True
+        except SQLAlchemyError as e:
+            session.rollback()
+            print(f"Ошибка при обновлении предпочтений пользователя: {e}")
+            return False
 
 
 def save_candidate(
