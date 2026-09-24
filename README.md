@@ -116,11 +116,11 @@ VKinder-App/
     DB_PORT=5432
     DB_NAME=vkinder_db
     DB_USER=postgres
-    DB_PASSWORD=your_secure_password
+    DB_PASSWORD='your_secure_password'
 
     # Токены VK API
-    VK_BOT_TOKEN=your_group_token_here
-    VK_USER_TOKEN=your_user_token_here
+    VK_API_TOKEN_BOT='your_group_token_here'
+    USER_TOKEN='your_user_token_here'
     ```
 5. **Запустите приложение:**
     ```bash
