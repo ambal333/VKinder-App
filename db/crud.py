@@ -19,7 +19,6 @@ def get_or_create_user(
     age: int,
     city: str,
     gender: int,
-    search_gender: Optional[str] = None,
     photo_url: Optional[str] = None
 ) -> Optional[User]:
     """
@@ -50,7 +49,6 @@ def get_or_create_user(
                     age=age,
                     city=city,
                     gender=gender,
-                    search_gender=search_gender,
                     photo_url=photo_url
                 )
                 session.add(user)

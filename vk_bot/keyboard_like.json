@@ -5,18 +5,25 @@
       {
         "action": {
           "type": "text",
-          "payload": "{\"button\": \"2\"}",
-          "label": "лайк"
+          "label": "Лайк"
         },
-        "color": "primary"
+        "color": "positive"
       },
       {
         "action": {
           "type": "text",
-          "payload": "{\"button\": \"2\"}",
-          "label": "дизлайк"
+          "label": "Следующая анкета"
         },
         "color": "primary"
+      }
+    ],
+    [
+      {
+        "action": {
+          "type": "text",
+          "label": "Я больше не хочу никого искать"
+        },
+        "color": "negative"
       }
     ]
   ]

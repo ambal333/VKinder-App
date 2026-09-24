@@ -4,8 +4,9 @@
 """
 
 from db.database import init_db
-from vk_bot.vk_get_info_photo_user import start_bot
-from vk_bot.vk_get_info_photo_user import keyboard_default,keyboard_like
+from vk_bot.new_bot import start_bot
+from vk_bot.new_bot import keyboard_default,keyboard_like
+
 
 def main():
     print("🚀 Запуск VKinder...")

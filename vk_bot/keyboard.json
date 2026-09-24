@@ -1,48 +1,45 @@
 {
   "one_time": false,
-  "buttons":[
+  "buttons": [
     [
       {
-        "action":{
-          "type":"text",
-          "payload":"{\"button\": \"2\"}",
-          "label":"Выход"
+        "action": {
+          "type": "text",
+          "label": "создать анкету"
         },
-        "color":"primary"
+        "color": "primary"
       },
       {
-        "action":{
-          "type":"text",
-          "payload":"{\"button\": \"2\"}",
-          "label":"Добавить в избранное"
+        "action": {
+          "type": "text",
+          "label": "моя анкета"
         },
-        "color":"primary"
+        "color": "primary"
       }
     ],
     [
       {
-        "action":{
-          "type":"text",
-          "payload":"{\"button\": \"1\"}",
-          "label":"Моя анкета"
+        "action": {
+          "type": "text",
+          "label": "Смотреть анкеты"
         },
-        "color":"negative"
+        "color": "primary"
       },
       {
-        "action":{
-          "type":"text",
-          "payload":"{\"button\": \"2\"}",
-          "label":"Создать анкету"
+        "action": {
+          "type": "text",
+          "label": "Мои симпатии"
         },
-        "color":"positive"
-      },
+        "color": "secondary"
+      }
+    ],
+    [
       {
-        "action":{
-          "type":"text",
-          "payload":"{\"button\": \"2\"}",
-          "label":"Найти пару"
+        "action": {
+          "type": "text",
+          "label": "Я больше не хочу никого искать"
         },
-        "color":"primary"
+        "color": "negative"
       }
     ]
   ]
